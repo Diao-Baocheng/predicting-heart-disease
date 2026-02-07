@@ -4,6 +4,7 @@
 该脚本创建一个包含缺失值的测试数据集，并演示 DataLoader 的缺失值报告功能
 """
 
+import tempfile
 from pathlib import Path
 import pandas as pd
 from src.data_loader import DataLoader
@@ -13,9 +14,8 @@ def create_test_data_with_missing_values():
     """创建包含缺失值的测试数据"""
     print("创建包含缺失值的测试数据...")
     
-    # 创建临时目录
-    temp_dir = Path("/tmp/heart_disease_test")
-    temp_dir.mkdir(exist_ok=True)
+    # 创建临时目录（跨平台兼容）
+    temp_dir = Path(tempfile.mkdtemp(prefix="heart_disease_test_"))
     
     # 创建包含缺失值的数据
     data = {

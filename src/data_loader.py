@@ -22,7 +22,11 @@ class DataLoader:
     Attributes:
         data_path (Path): 数据文件路径
         data (pd.DataFrame): 加载的数据框
+        CATEGORICAL_THRESHOLD (int): 判断分类特征的唯一值数量阈值
     """
+    
+    # 类常量：用于判断特征类型的阈值
+    CATEGORICAL_THRESHOLD = 10
     
     def __init__(self, data_path: Optional[Path] = None):
         """
@@ -120,7 +124,7 @@ class DataLoader:
             
             # 推断特征类型
             if col_dtype in ['int64', 'float64']:
-                if unique_count <= 10:
+                if unique_count <= self.CATEGORICAL_THRESHOLD:
                     feature_type = '分类特征 (Categorical)'
                 else:
                     feature_type = '数值特征 (Numerical)'

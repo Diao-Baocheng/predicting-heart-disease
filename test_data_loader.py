@@ -42,9 +42,8 @@ def test_individual_reports():
     print("-" * 60)
     
     loader = DataLoader()
-    # 注意：load_data() 会自动调用报告方法
-    # 这里演示如何手动调用
-    loader.data = loader.load_data()
+    # load_data() 会自动调用报告方法并设置 self.data
+    data = loader.load_data()
     
     # 获取数据摘要
     loader.get_data_summary()
